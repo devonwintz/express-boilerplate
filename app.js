@@ -7,17 +7,18 @@ require("dotenv/config");
 const app = express();
 
 //Routes
-const SampleRoute = require("./routes/sampleRoute");
+const healthRoute = require("./routes/health");
+const usersRoute = require("./routes/users");
 
 //Middlewares
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/samples", SampleRoute);
+app.use("/", usersRoute);
+app.use("/", healthRoute);
 
 //DB Connection
-
 mongoose.connect(process.env.DB_CONNECTON, () =>
-  console.log("Successfully connected to the DB")
+    console.log("Successfully connected to the DB")
 );
 
 app.listen(8000);
